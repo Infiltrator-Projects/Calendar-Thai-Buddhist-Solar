@@ -1,0 +1,107 @@
+{
+  "kind": "calendar",
+  "id": "thai-buddhist-solar",
+  "name": "Historical Thai Buddhist Solar Calendar",
+  "repository": "Calendar-Thai-Buddhist-Solar",
+  "defines": {
+    "INFILTRATR_TEMPORAL_DISPLAY_NAME": "\"Historical Thai Buddhist Solar Calendar\""
+  },
+  "entry": "resources/temporal/src/calendars/thai-buddhist-solar.c",
+  "mode": "CALENDAR_CALENDAR_MODE_THAI_BUDDHIST_SOLAR",
+  "family": "native",
+  "build_dependencies": [
+    "glib-2.0"
+  ],
+  "upstream_repository": "Infiltrator-Projects/Libraries",
+  "upstream_revision": "8d60662114e3052380f6f88ad3cacd9732ae7131",
+  "upstream_version": "1.19.78",
+  "source_copy_only": true,
+  "common_modified": false,
+  "files": [
+    {
+      "path": "include/infiltratr/temporal.h",
+      "source_path": "include/infiltratr/temporal.h",
+      "source_sha256": "bf212e14f7c553ce7b6f36c552ab696dcdedeebed3a61fe34b45b39881e3f539",
+      "copied_sha256": "bf212e14f7c553ce7b6f36c552ab696dcdedeebed3a61fe34b45b39881e3f539",
+      "selected_definitions": []
+    },
+    {
+      "path": "include/infiltratr/temporal_calendar.h",
+      "source_path": "include/infiltratr/temporal_calendar.h",
+      "source_sha256": "945ad244cdbc86cd563d9343e2f9fb1c32520f76f9aa85b88634138fccafdc3a",
+      "copied_sha256": "945ad244cdbc86cd563d9343e2f9fb1c32520f76f9aa85b88634138fccafdc3a",
+      "selected_definitions": [
+        "INFILTRATR_TEMPORAL_CALENDAR_PROVIDER_ABI"
+      ]
+    },
+    {
+      "path": "include/infiltratr/temporal_resource.h",
+      "source_path": "include/infiltratr/temporal_resource.h",
+      "source_sha256": "7ce225d7b2c6721b7d56fc152f68c4c680f6a7d068db26a5942fe2f3b583512d",
+      "copied_sha256": "7ce225d7b2c6721b7d56fc152f68c4c680f6a7d068db26a5942fe2f3b583512d",
+      "selected_definitions": []
+    },
+    {
+      "path": "include/infiltratr/temporal_runtime.h",
+      "source_path": "include/infiltratr/temporal_runtime.h",
+      "source_sha256": "6b5c52a266b53b5ceaafe048532c282a7e96fe64c3a1381a13c35c161629ba67",
+      "copied_sha256": "6b5c52a266b53b5ceaafe048532c282a7e96fe64c3a1381a13c35c161629ba67",
+      "selected_definitions": [
+        "INFILTRATR_TEMPORAL_RESOURCE_METADATA_ABI"
+      ]
+    },
+    {
+      "path": "src/provider.c",
+      "source_path": "resources/temporal/src/calendars/thai-buddhist-solar.c",
+      "source_sha256": "c7bb1876e16c84da60d5277cc43d1942d18186005a89e79d8801c33d0c911753",
+      "copied_sha256": "c7bb1876e16c84da60d5277cc43d1942d18186005a89e79d8801c33d0c911753",
+      "selected_definitions": [
+        "EXPORT",
+        "FIRST_JANUARY_YEAR",
+        "FIRST_THAI_YEAR",
+        "GREGORIAN_JDN_ORDINAL_OFFSET",
+        "LAST_APRIL_YEAR",
+        "THAI_START_JDN",
+        "date_at",
+        "fields_at",
+        "infiltratr_temporal_calendar_provider_v1",
+        "infiltratr_temporal_resource_metadata_v1",
+        "metadata",
+        "provider",
+        "provider_add_periods",
+        "provider_add_years",
+        "provider_fields",
+        "provider_format",
+        "provider_period_start",
+        "thai_to_jdn",
+        "thai_year"
+      ]
+    },
+    {
+      "path": "exports.map",
+      "source_path": "resources/temporal/src/calendars/calendar-resource.map",
+      "source_sha256": "5207fffbf1612bcb5a58bc02db60240b31eb7ae45d3af1d195cc545c9530854f",
+      "copied_sha256": "5207fffbf1612bcb5a58bc02db60240b31eb7ae45d3af1d195cc545c9530854f",
+      "selected_definitions": []
+    },
+    {
+      "path": "LICENSE",
+      "source_path": "LICENSE",
+      "source_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "copied_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "selected_definitions": []
+    }
+  ],
+  "copy_method": "Select this provider in the original conditional source, specialize private dispatch branches, retain reachable provider/helper definitions, and copy the transitive local headers. Original functions and data remain attributed to Common.",
+  "verification": {
+    "repository": "Calendar-Thai-Buddhist-Solar",
+    "compared_observations": 883,
+    "retained_fixtures": 84,
+    "exports": [
+      "infiltratr_temporal_calendar_provider_v1",
+      "infiltratr_temporal_resource_metadata_v1"
+    ],
+    "abi_identical": true,
+    "behaviour_identical": true
+  }
+}
