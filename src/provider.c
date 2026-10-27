@@ -30,6 +30,8 @@
 #include <string.h>
 
 #define THAI_START_JDN INT64_C(2419494)
+/* GDateYear is uint16: later ordinals otherwise silently wrap the year. */
+#define THAI_LAST_JDN INT64_C(25657591) /* Gregorian 65535-12-31 */
 #define GREGORIAN_JDN_ORDINAL_OFFSET INT64_C(1721425)
 #define FIRST_THAI_YEAR INT64_C(2455)
 #define LAST_APRIL_YEAR INT64_C(2483)
@@ -39,7 +41,7 @@ static bool date_at(int64_t jdn, GDate *date)
 {
     /* Validate before subtraction: arbitrary JDNs must not overflow. */
     if (date == NULL || jdn < THAI_START_JDN ||
-        jdn > GREGORIAN_JDN_ORDINAL_OFFSET + G_MAXUINT32)
+        jdn > THAI_LAST_JDN)
         return false;
     const int64_t ordinal = jdn - GREGORIAN_JDN_ORDINAL_OFFSET;
     g_date_clear(date, 1U);
@@ -123,6 +125,7 @@ static bool provider_format(const InfiltratrTemporalCalendarProvider *self,
     GDate date;
     char month[128];
     char weekday[128];
+    char text[512];
     int count;
     int64_t year;
 
@@ -139,21 +142,21 @@ static bool provider_format(const InfiltratrTemporalCalendarProvider *self,
     switch (part)
     {
         case INFILTRATR_TEMPORAL_CALENDAR_DATE_PART_DAY:
-            count = snprintf(buffer, capacity, "%u",
+            count = snprintf(text, sizeof(text), "%u",
                              (unsigned)g_date_get_day(&date));
             break;
         case INFILTRATR_TEMPORAL_CALENDAR_DATE_PART_MONTH:
-            count = snprintf(buffer, capacity, "%s", month);
+            count = snprintf(text, sizeof(text), "%s", month);
             break;
         case INFILTRATR_TEMPORAL_CALENDAR_DATE_PART_YEAR:
-            count = snprintf(buffer, capacity, "%" G_GINT64_FORMAT, year);
+            count = snprintf(text, sizeof(text), "%" G_GINT64_FORMAT, year);
             break;
         case INFILTRATR_TEMPORAL_CALENDAR_DATE_PART_SHORT:
-            count = snprintf(buffer, capacity, "%u %s %" G_GINT64_FORMAT " B.E.",
+            count = snprintf(text, sizeof(text), "%u %s %" G_GINT64_FORMAT " B.E.",
                              (unsigned)g_date_get_day(&date), month, year);
             break;
         case INFILTRATR_TEMPORAL_CALENDAR_DATE_PART_FULL:
-            count = snprintf(buffer, capacity,
+            count = snprintf(text, sizeof(text),
                              "%s, %u %s %" G_GINT64_FORMAT " B.E.",
                              weekday, (unsigned)g_date_get_day(&date),
                              month, year);
@@ -161,8 +164,10 @@ static bool provider_format(const InfiltratrTemporalCalendarProvider *self,
         default:
             return false;
     }
-    if (count <= 0 || (size_t)count >= capacity)
+    if (count <= 0 || (size_t)count >= sizeof(text) ||
+        (size_t)count >= capacity)
         return false;
+    memcpy(buffer, text, (size_t)count + 1U);
     *length = (size_t)count;
     return true;
 }
