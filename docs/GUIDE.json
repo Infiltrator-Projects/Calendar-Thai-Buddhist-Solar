@@ -1,0 +1,35 @@
+{
+  "title": "Historical Thai Buddhist Solar Calendar",
+  "intro": "Thailand's modern Buddhist Era dates use a different year number. This historical model also remembers the former April-start year and the 1940 transition.",
+  "summary": "Buddhist Era year numbers with a change from April-start to January-start years on 1 January 1941.",
+  "origin": "Thailand introduced a solar civil system in 1912. The year-start change in 1941 produced an unusually short Buddhist Era year 2483.",
+  "ring_label": "4",
+  "ring_caption": "PHASES",
+  "diagram_title": "THAILAND'S YEAR-START CHANGE",
+  "structure": "Before 1941, a Buddhist Era year began on 1 April. Buddhist Era 2483 ran only from April to December 1940, after which years began in January.",
+  "diagram_caption": "1912 SOLAR SYSTEM / 1940 TRANSITION / 1941 REFORM",
+  "sections": [
+    {
+      "name": "1912: solar reform",
+      "days": "April"
+    },
+    {
+      "name": "1912–1940: April",
+      "days": "year start"
+    },
+    {
+      "name": "1940: shortened 2483",
+      "days": "9 months",
+      "special": true
+    },
+    {
+      "name": "1941 onward",
+      "days": "January"
+    }
+  ],
+  "pattern_note": "There is no January–March in Buddhist Era year 2483. Those dates belong to a different year, and fabricated 2483 dates must be rejected.",
+  "history": "A common modern conversion adds 543 to the Gregorian year, but that shortcut alone gets some early twentieth-century Thai dates wrong because years once changed in April.",
+  "example": "Gregorian 2026 is Thai Buddhist Era 2569. Gregorian October 1940 is in Buddhist Era 2483; January 1941 is already in 2484.",
+  "limits": "This provider begins with the 1912 solar civil convention. It must not invent missing January–March dates in BE 2483 or treat all earlier regional calendars as the same.",
+  "source": "https://github.com/Infiltrator-Projects/Calendar-Thai-Buddhist-Solar"
+}
