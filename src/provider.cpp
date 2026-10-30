@@ -24,6 +24,9 @@
 #include <infiltratr/temporal_calendar.h>
 
 #include <glib.h>
+#include <algorithm>
+#include <type_traits>
+static_assert(std::is_standard_layout_v<InfiltratrTemporalCalendarFields>);
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -63,7 +66,7 @@ static bool fields_at(int64_t jdn, InfiltratrTemporalCalendarFields *fields)
 
     if (fields == NULL || !date_at(jdn, &date))
         return false;
-    *fields = (InfiltratrTemporalCalendarFields){
+    *fields = InfiltratrTemporalCalendarFields{
         .year = thai_year(&date),
         .month = (int32_t)g_date_get_month(&date),
         .day = (int32_t)g_date_get_day(&date),
@@ -207,7 +210,7 @@ static bool provider_add_periods(const InfiltratrTemporalCalendarProvider *self,
     ++month;
     if (year < 1 || year > G_MAXUINT16)
         return false;
-    day = MIN((int)g_date_get_day(&date),
+    day = std::min((int)g_date_get_day(&date),
               (int)g_date_get_days_in_month((GDateMonth)month,
                                              (GDateYear)year));
     g_date_clear(&destination, 1U);
@@ -236,7 +239,7 @@ static bool provider_add_years(const InfiltratrTemporalCalendarProvider *self,
         ((year < FIRST_JANUARY_YEAR && fields.month < 4) ? 542 : 543);
     if (gregorian_year < 1 || gregorian_year > G_MAXUINT16)
         return false;
-    day = MIN(fields.day, (int)g_date_get_days_in_month(
+    day = std::min(fields.day, (int)g_date_get_days_in_month(
         (GDateMonth)fields.month, (GDateYear)gregorian_year));
     g_date_clear(&date, 1U);
     g_date_set_dmy(&date, (GDateDay)day, (GDateMonth)fields.month,
@@ -261,9 +264,9 @@ static const InfiltratrTemporalCalendarProvider provider = {
 
 /* The public ABI entry points are externally visible and must have
  * declarations before their definitions under strict -Wmissing-prototypes. */
-const InfiltratrTemporalResourceMetadata *
+extern "C" const InfiltratrTemporalResourceMetadata *
 infiltratr_temporal_resource_metadata_v1(void);
-const InfiltratrTemporalCalendarProvider *
+extern "C" const InfiltratrTemporalCalendarProvider *
 infiltratr_temporal_calendar_provider_v1(void);
 
 #if defined(_WIN32)
@@ -271,7 +274,7 @@ infiltratr_temporal_calendar_provider_v1(void);
 #else
 #define EXPORT __attribute__((visibility("default")))
 #endif
-EXPORT const InfiltratrTemporalResourceMetadata *
+extern "C" EXPORT const InfiltratrTemporalResourceMetadata *
 infiltratr_temporal_resource_metadata_v1(void) { return &metadata; }
-EXPORT const InfiltratrTemporalCalendarProvider *
+extern "C" EXPORT const InfiltratrTemporalCalendarProvider *
 infiltratr_temporal_calendar_provider_v1(void) { return &provider; }

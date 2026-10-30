@@ -51,10 +51,9 @@
       ]
     },
     {
-      "path": "src/provider.c",
+      "path": "src/provider.cpp",
       "source_path": "resources/temporal/src/calendars/thai-buddhist-solar.c",
       "source_sha256": "c7bb1876e16c84da60d5277cc43d1942d18186005a89e79d8801c33d0c911753",
-      "copied_sha256": "c7bb1876e16c84da60d5277cc43d1942d18186005a89e79d8801c33d0c911753",
       "selected_definitions": [
         "EXPORT",
         "FIRST_JANUARY_YEAR",
@@ -75,7 +74,9 @@
         "provider_period_start",
         "thai_to_jdn",
         "thai_year"
-      ]
+      ],
+      "ported_to": "C++20",
+      "source_baseline_sha256": "c7bb1876e16c84da60d5277cc43d1942d18186005a89e79d8801c33d0c911753"
     },
     {
       "path": "exports.map",
@@ -92,7 +93,7 @@
       "selected_definitions": []
     }
   ],
-  "copy_method": "Original Common source provenance is historical; active code links the exact Common 1.19.80 static archive from its pinned git submodule.",
+  "copy_method": "Existing chronology ported to C++20, maintaining the stable extern C ABI, and linked to the pinned authoritative Common archive.",
   "verification": {
     "repository": "Calendar-Thai-Buddhist-Solar",
     "compared_observations": 883,
@@ -107,7 +108,7 @@
   "common_dependency": {
     "type": "git-submodule",
     "path": "common",
-    "revision": "dc4aac326964ca4400b6e21851d16eea674040c8",
+    "revision": "f1788fdfb981524172ddfa65a46ead52c33719c6",
     "version": "1.19.80",
     "linkage": "static"
   }

@@ -1,5 +1,7 @@
 # Historical Thai Buddhist Solar Calendar
 
+**Implementation:** Native C++20 chronology engine, linked to the authoritative Common C ABI. Python-free build, verification, native installer and illustrated PDF packaging.
+
 **InfiltratorOS calendar resource** · **Stable ID:** `thai-buddhist-solar` · **Module:** `Historical Thai Buddhist Solar Calendar.so`
 
 Thai solar civil model from 1 April 1912, April-start years to 1940, shortened 2483 B.E. year and January year start from 1941.
