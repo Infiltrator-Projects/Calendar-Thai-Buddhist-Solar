@@ -20,9 +20,10 @@ CPPFLAGS += -I$(COMMON_DIR)/include -Iinclude -Isrc -Isrc/support -Isrc/calendar
     -include include/provider-config.h -DGETTEXT_PACKAGE=\"infiltrator-temporal-resources\" \
     -DU_DISABLE_RENAMING=1 -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_74 \
     -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_74
-CXXFLAGS ?= -O2 -g
+# Carry the package builder's optimisation and PGO flags into C++ sources.
+CXXFLAGS ?= $(if $(strip $(CFLAGS)),$(filter-out -std=c11,$(CFLAGS)),-O2 -g)
 CXXFLAGS += -std=c++20 -fPIC -fvisibility=hidden -ffunction-sections -fdata-sections \
-    -Wall -Wextra -Wpedantic -Werror -Wformat=2 -Wshadow -fstack-protector-strong \
+    -Wall -Wextra -Wpedantic -Werror -Wformat=2 -Wshadow -Wno-missing-profile -fstack-protector-strong \
     -fno-common -ffile-prefix-map=$(CURDIR)=. -fdebug-prefix-map=$(CURDIR)=.
 LDLIBS += $(DEP_LIBS) -lm -ldl -pthread
 .PHONY: common-check all check audit-authorities clean release deb native-deb
@@ -35,7 +36,7 @@ common-check:
 	@test ! -d include/infiltratr || { echo "Copied Common headers forbidden" >&2; exit 1; }
 $(COMMON_ARCHIVE): common-check
 	@mkdir -p "$(COMMON_BUILD_DIR)"
-	$(MAKE) -C "$(COMMON_DIR)" CC="$(CC)" BUILD_DIR="$(COMMON_BUILD_DIR)" all
+	$(MAKE) -C "$(COMMON_DIR)" CC="$(CC)" BUILD_DIR="$(COMMON_BUILD_DIR)" CFLAGS="$(CFLAGS) -Wno-missing-profile" all
 all: $(COMMON_ARCHIVE)
 	@mkdir -p "$(BUILD_DIR)"
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(DEP_CFLAGS) -shared $(SOURCES) $(COMMON_ARCHIVE) \
