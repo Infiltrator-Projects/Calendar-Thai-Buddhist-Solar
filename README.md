@@ -50,4 +50,4 @@ Each package owns only this provider and its passive documentation. Its `Replace
 
 ## Illustrated user guide
 
-The provider package installs only `Historical Thai Buddhist Solar Calendar.so` and `Historical Thai Buddhist Solar Calendar.pdf`. Development documents remain in GitHub; native optimisation and source attestations remain in Debian control metadata.
+The provider package installs only `Historical Thai Buddhist Solar Calendar.so` and `Calendar-Thai-Buddhist-Solar.pdf`. Development documents remain in GitHub; native optimisation and source attestations remain in Debian control metadata.
