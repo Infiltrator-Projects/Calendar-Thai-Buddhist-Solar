@@ -133,8 +133,7 @@ static bool provider_format(const InfiltratrTemporalCalendarProvider *self,
     int64_t year;
 
     (void)self;
-    if (buffer == NULL || capacity == 0U || length == NULL ||
-        !date_at(jdn, &date))
+    if (buffer == NULL || capacity == 0U || !date_at(jdn, &date))
         return false;
     year = thai_year(&date);
 
@@ -171,7 +170,7 @@ static bool provider_format(const InfiltratrTemporalCalendarProvider *self,
         (size_t)count >= capacity)
         return false;
     memcpy(buffer, text, (size_t)count + 1U);
-    *length = (size_t)count;
+    if (length != NULL) *length = (size_t)count;
     return true;
 }
 
